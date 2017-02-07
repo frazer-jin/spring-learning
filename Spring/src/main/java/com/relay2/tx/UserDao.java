@@ -25,7 +25,21 @@ public class UserDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public int create(User user){
+	public int create(User user) throws Exception{
+		
+		// 有意产生异常
+		// 产生运行期异常（非检测异常）的测试
+		if(user.getFirstName().equals("运行期异常")){
+			throw new RuntimeException("runtime exception...");
+		}
+		
+		// 产生非运行期异常（检测异常）的测试
+		if(user.getFirstName().equals("非运行期异常")){
+			throw new Exception("not runtime exception...");
+		}
+		// 结论： 默认地，事务只有在抛出运行期异常的情况下才会回滚，如果期望改变这一默认行为，需要在@Transactional 标签上加上
+		// rollbackFor=XXXException.class 这一属性
+		// 如果 被 @Transactional 包裹的方法 try -- catch 了所有的异常而并没有往外抛异常，这程序认为执行正常，不会回滚事务。
 		String sql = "insert into user(first_name, last_name, email, birth) values(?,?,?,?)";
 		
 		PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory(sql, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.DATE);

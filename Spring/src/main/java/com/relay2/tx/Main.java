@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("application-tx.xml");
 		
@@ -17,6 +17,26 @@ public class Main {
 		
 		System.out.println(service);
 		
+		//test1(service);
+//		test2(service);
+		test3(service);
+	}
+	
+	public static void test2(UserService service) throws Exception {
+		User user1 = new User("111", "Smith", "js@relay2.com", new Date(System.currentTimeMillis()));
+		User user2 = new User("运行期异常", "Smith", "js@relay2.com", new Date(System.currentTimeMillis()));
+		
+		service.createUserWithTransaction(user1, user2);
+	}
+	
+	public static void test3(UserService service) throws Exception {
+		User user1 = new User("222", "Smith", "js@relay2.com", new Date(System.currentTimeMillis()));
+		User user2 = new User("非运行期异常", "Smith", "js@relay2.com", new Date(System.currentTimeMillis()));
+		
+		service.createUserWithTransaction(user1, user2);
+	}
+
+	public static void test1(UserService service) throws Exception {
 		// insert one
 		User user = new User("Jame", "Smith", "js@relay2.com", new Date(System.currentTimeMillis()));
 		int id = service.createUser(user);
