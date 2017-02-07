@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 	<task:annotation-driven scheduler="executor"/> -->
+	
+	 	<task:scheduler id="executor" pool-size="10"/>
+		
+		<task:scheduled-tasks scheduler="executor">
+			<task:scheduled ref="scheduler" method="doSomething" fixed-rate="2000"/>
+			<task:scheduled ref="scheduler" method="doSomething2" fixed-delay="1000"/>
+		</task:scheduled-tasks>
+		
+		<bean id="scheduler" class="com.relay2.schedule.MyScheduler"></bean>
+		
+		<bean id="task" class="com.relay2.schedule.MyTask"></bean>
+		
+		<bean id="jobDetails" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject" ref="task"></property>
+			<property name="targetMethod" value="runTask1"></property>
+		</bean>
+		
+		<!-- trigger -->
+		<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+			<property name="jobDetail" ref="jobDetails"></property>
+			<property name="startDelay" value="4000"></property>
+			<property name="repeatInterval" value="5000"></property>
+			<property name="repeatCount" value="5"></property>
+		</bean>
+		
+		<!-- scheduler -->
+		<bean id="" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+			<property name="triggers">
+				<list>
+					<ref bean="simpleTrigger"/>
+				</list>
+			</property>
+		</bean>
+
+</beans>

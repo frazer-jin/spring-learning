@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-10-29 13:38:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.relay2.hibernate.entities.Book" table="SH_BOOK">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="isbn" type="java.lang.String">
+            <column name="ISBN" />
+        </property>
+        <property name="price" type="int">
+            <column name="PRICE" />
+        </property>
+        <property name="count" type="int">
+            <column name="COUNT" />
+        </property>
+    </class>
+</hibernate-mapping>

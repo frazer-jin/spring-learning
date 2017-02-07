@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- approach 1 -->
+	<!--  
+		<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller"></bean>
+	-->
+	<!-- approach 2 -->
+	<oxm:castor-marshaller id="castorMarshaller"/>
+	
+	<bean id="service" class="com.relay2.oxm.Service">
+		<property name="marshaller" value="#{castorMarshaller}"></property>
+		<property name="unmarshaller" value="#{castorMarshaller}"></property>
+	</bean>
+	
+</beans>
+<!-- Java Technology
+1. IOC/DI
+2. AOP
+3. JDBC
+4. ORM
+5. OXM
+6. WEB
+7. JMS
+8. Cache
+9. JMX
+///
+1. RDBM
+2. NOSQL
+ -->

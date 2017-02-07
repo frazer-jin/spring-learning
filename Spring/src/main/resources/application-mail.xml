@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="minfei.jin@xx.com"></property>
+		<property name="subject" value="You order"></property>
+	</bean>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="minfei-vm"></property>
+	</bean>
+	
+	<bean id="orderManager" class="com.relay2.email.SimpleOrderManager">
+		<property name="mailSender" ref="mailSender"></property>
+		<property name="simpleMailMessage" ref="templateMessage"></property>
+	</bean>
+	
+	<bean id="orderManager2" class="com.relay2.email.SimpleOrderManager2">
+		<property name="mailSender" ref="mailSender"></property>
+	</bean>
+	
+	<bean id="orderManager3" class="com.relay2.email.SimpleOrderManager3">
+		<property name="mailSender" ref="mailSender"></property>
+	</bean>
+
+	<bean id="orderManager4" class="com.relay2.email.SimpleOrderManager4">
+		<property name="mailSender" ref="mailSender"></property>
+	</bean>
+	
+	<bean id="orderManager5" class="com.relay2.email.VelocityOrderManager">
+		<property name="mailSender" ref="mailSender"></property>
+		<property name="velocityEngine" ref="velocityEngine"></property>
+	</bean>
+	
+	<!-- Velocity engine -->
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+            <value>
+                resource.loader=class
+                class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+            </value>
+		</property>
+	</bean>
+	
+</beans>

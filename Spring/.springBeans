@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.7.0.201506251244-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>src/main/resources/applicationContext.xml</config>
+		<config>src/main/resources/application-aop.xml</config>
+		<config>src/main/resources/application-aop-xml.xml</config>
+		<config>src/main/resources/application-inject.xml</config>
+		<config>src/main/resources/application-lifecycle.xml</config>
+		<config>src/main/resources/application-autowired.xml</config>
+		<config>src/main/resources/application-message.xml</config>
+		<config>src/main/resources/application-resource.xml</config>
+		<config>src/main/resources/application-spel.xml</config>
+		<config>src/main/resources/application-tx.xml</config>
+		<config>src/main/resources/application-embedded.xml</config>
+		<config>src/main/resources/application-hibernate.xml</config>
+		<config>src/main/java/com/relay2/hibernate/entities/Book.hbm.xml</config>
+		<config>src/main/resources/application-oxm.xml</config>
+		<config>src/main/resources/application-mail.xml</config>
+		<config>src/main/resources/application-schedule.xml</config>
+		<config>src/main/resources/application-ldap.xml</config>
+	</configs>
+	<autoconfigs>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

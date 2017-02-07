@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<bean id="helloWorld" class="com.relay2.beans.HelloWorld">
+		<property name="name" value="Jack"></property>
+	</bean>
+	
+	<bean id="exampleBean" class="com.relay2.beans.ExampleBean">
+		<constructor-arg type="java.lang.String" value="18"></constructor-arg>
+		<constructor-arg value="true"></constructor-arg>
+		<constructor-arg type="int" value="12"></constructor-arg>
+	</bean>
+
+	<bean id="exampleBean1" class="com.relay2.beans.ExampleBean">
+		<constructor-arg name="age" value="17"></constructor-arg>
+		<constructor-arg name="sex" value="true"></constructor-arg>
+	</bean>
+
+	<bean id="userDao1" class="com.relay2.beans.UserDao" depends-on="exampleBean2"></bean>
+	<bean id="userService" class="com.relay2.beans.UserService">
+		<property name="userDao" ref="userDao1"></property>
+	</bean>
+	
+	<bean id="userService2" class="com.relay2.beans.UserService" autowire="byType">
+	</bean>
+	
+	<!-- dataSource -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="root"></property>
+		<property name="password" value="mysql"></property>
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://minfei-vm/quartz"></property>
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<beans default-lazy-init="true">
+		<bean id="exampleBean2" class="com.relay2.beans.ExampleBean" c:age="22" c:sex="false" c:size="10" ></bean>
+	</beans>
+</beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ldap="http://www.springframework.org/schema/ldap"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/ldap http://www.springframework.org/schema/ldap/spring-ldap-2.0.xsd">
+
+	<bean id="embeddedLdapServer"
+		class="org.springframework.ldap.test.EmbeddedLdapServerFactoryBean">
+		<property name="partitionName" value="example" />
+		<property name="partitionSuffix" value="dc=relay2,dc=com" />
+		<property name="port" value="9321" />
+	</bean>
+
+</beans>
